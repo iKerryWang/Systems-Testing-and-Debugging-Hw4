@@ -1,8 +1,10 @@
 name: CI
 
-'on':
+on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - master
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
       - name: Run tests and JaCoCo
         run: chmod +x gradlew && ./gradlew test jacocoTestReport --no-daemon
 
-      - name: Generate JaCoCo badges (fail if instruction or branch coverage regressed)
+      - name: Generate JaCoCo badges
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
         with:
