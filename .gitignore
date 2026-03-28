@@ -41,3 +41,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Submission artifact (regenerate before upload) ###
+hw4.zip

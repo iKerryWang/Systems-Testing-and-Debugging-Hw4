@@ -1,20 +1,32 @@
+/**
+ * Task 1 / 2 tests: {@code src/test/java/task1} ({@code package task1}),
+ * {@code src/test/java/task2} ({@code package task2}).
+ * Course JAR: {@code src/test/resources/guessnumber.jar} (test compile classpath).
+ * Task 2 Javadoc (HTML): {@code src/test/java/task2/doc/}.
+ */
 plugins {
     id 'java'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation files('src/test/resources/guessnumber.jar')
 }
 
-test {
+tasks.named('jar') { enabled = false }
+
+tasks.named('test', Test) {
     useJUnitPlatform()
 }
