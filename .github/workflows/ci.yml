@@ -25,14 +25,15 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Run tests and JaCoCo
-        run: chmod +x gradlew && ./gradlew test jacocoTestReport --no-daemon
+      # JaCoCo + badges apply to the task3 subproject (see settings.gradle include 'task3')
+      - name: Run task3 tests and JaCoCo
+        run: chmod +x gradlew && ./gradlew :task3:test :task3:jacocoTestReport --no-daemon
 
       - name: Generate JaCoCo badges
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
         with:
-          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+          jacoco-csv-file: task3/build/reports/jacoco/test/jacocoTestReport.csv
           badges-directory: .github/badges
           generate-coverage-badge: true
           generate-branches-badge: true
